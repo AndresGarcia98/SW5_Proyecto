@@ -15,24 +15,24 @@ var riesgoSchema = new Schema({
     nivel_2: String,
     medicion_inherente: {
         probabilidad_ocurrencia: {
-            type: Number
+            type: String
         },
         magnitud_impacto: {
-            type: Number
+            type: String
         },
         criticidad_inherente: {
-            type: Number
+            type: String
         }
     },
     medicion_residual: {
         probabilidad_ocurrencia: {
-            type: Number
+            type: String
         },
         magnitud_impacto: {
-            type: Number
+            type: String
         },
         criticidad_residual: {
-            type: Number
+            type: String
         }
     },
     controles_tratamientos: {

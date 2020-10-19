@@ -14,6 +14,7 @@ var mongoose = require('mongoose');
 var mongoDB = 'mongodb+srv://FaktorRiskUser:FaktorRiskProject@clusterprincipal.issc3.gcp.mongodb.net/FaktorRisk?retryWrites=true&w=majority';
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 mongoose.connect(mongoDB, { useNewUrlParser: true, });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
