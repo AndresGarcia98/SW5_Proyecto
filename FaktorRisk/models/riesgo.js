@@ -5,11 +5,11 @@ var riesgoSchema = new Schema({
     code: {
         type: Number,
     },
+    proceso_asociado: [String],
     riesgo: String,
     descripcion: String,
+    riesgos_asociados: [String],
     causas: String,
-    proceso_asociado: [String],
-    riesgos_asocidos: [String],
     factor_del_riesgo: [String],
     nivel_1: String,
     nivel_2: String,
