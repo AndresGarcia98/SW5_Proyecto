@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var riesgoControllerAPI = require('../../controllers/API/riesgoControllerAPI');
 
-
 router.get('/', riesgoControllerAPI.risk_list);
 router.post('/evaluar_riesgo/generar_informe', riesgoControllerAPI.riesgo_create);
 router.get('/buscar_riesgo', riesgoControllerAPI.riesgo_getOne);

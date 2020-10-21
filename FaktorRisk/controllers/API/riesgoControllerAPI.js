@@ -3,7 +3,7 @@ var Riesgo = require('../../models/riesgo');
 exports.risk_list = function(req, res) {
     Riesgo.find({}, (err, data) => {
         if (err) res.json({
-            mensaje: "Lo sentimos ha surgido un problema y no podemos mostrarte la los riesgos de lavado de activo. Disculpa por las molestias"
+            mensaje: "Lo sentimos ha surgido un problema y no podemos mostrarte los riesgos de lavado de activo. Disculpa por las molestias"
         });
         else res.send(data)
     });
@@ -92,7 +92,7 @@ exports.riesgo_updateOne = function(req, res) {
 exports.map_risk = function(req, res) {
     Riesgo.aggregate(
         [{
-            '$re     placeWith': {
+            '$replaceWith': {
                 'code': '$code',
                 'nombre': '$riesgo',
                 'descripcion': '$descripcion',
@@ -114,7 +114,7 @@ exports.map_risk = function(req, res) {
 exports.gerential_inform = function(req, res) {
     Riesgo.aggregate(
         [{
-            '$re placeWith': {
+            '$replaceWith': {
                 'code': '$code',
                 'nombre': '$riesgo',
                 'descripcion': '$descripcion',
