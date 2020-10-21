@@ -2,7 +2,9 @@ var Riesgo = require('../../models/riesgo');
 
 exports.risk_list = function(req, res) {
     Riesgo.find({}, (err, data) => {
-        if (err) console.log(err);
+        if (err) res.json({
+            mensaje: "Lo sentimos ha surgido un problema y no podemos mostrarte la los riesgos de lavado de activo. Disculpa por las molestias"
+        });
         else res.send(data)
     });
 }
@@ -29,7 +31,11 @@ exports.riesgo_create = function(req, res) {
     });
 
     Riesgo.create(riesgo, (err) => {
-        if (err) console.log(err);
+        if (err) res.json({
+            mensaje: "Lo sentimos ha surgido un problema y no podemos agregar  el riesgo número " +
+                req.body.code + " a los riesgos de lavado de activos, puede ser un problema nuestro o revisa que ya no haya sido guardado un riesgo con el código " +
+                req.body.code + ". Disculpa por las molestias"
+        });
         else res.send(riesgo)
     });
 
@@ -37,14 +43,22 @@ exports.riesgo_create = function(req, res) {
 
 exports.riesgo_getOne = function(req, res) {
     Riesgo.findOne({ code: req.body.code }, (err, data) => {
-        if (err) console.log(err);
+        if (err) res.Status(500).json({
+            mensaje: "Lo sentimos ha surgido un problema y no podemos encontrar el riesgo con código " +
+                req.body.code + " en los riesgos de lavado de activos, puede ser un problema nuestro o revisa exista un riesgo guardado con el código" +
+                req.body.code + ". Disculpa por las molestias"
+        });
         else res.send(data)
     });
 }
 
 exports.riesgo_deleteOne = function(req, res) {
     Riesgo.findOneAndRemove({ code: req.body.code }, (err, data) => {
-        if (err) console.log(err);
+        if (err) res.json({
+            mensaje: "Lo sentimos ha surgido un problema y no podemos eliminar el riesgo con código " +
+                req.body.code + " de los riesgos de lavado de activos, puede ser un problema nuestro o revisa exista un riesgo guardado con el código" +
+                req.body.code + ". Disculpa por las molestias"
+        });
         else res.send(data)
     });
 }
@@ -66,7 +80,11 @@ exports.riesgo_updateOne = function(req, res) {
         meta: req.body.meta,
         frecuencia: req.body.frecuencia
     }, (err, data) => {
-        if (err) console.log(err);
+        if (err) res.json({
+            mensaje: "Lo sentimos ha surgido un problema y no podemos actualizar el riesgo con código " +
+                req.body.code + " en los riesgos de lavado de activos, puede ser un problema nuestro o revisa exista un riesgo guardado con el código" +
+                req.body.code + ". Disculpa por las molestias"
+        });
         else res.send(data)
     });
 }
@@ -74,7 +92,7 @@ exports.riesgo_updateOne = function(req, res) {
 exports.map_risk = function(req, res) {
     Riesgo.aggregate(
         [{
-            '$replaceWith': {
+            '$re     placeWith': {
                 'code': '$code',
                 'nombre': '$riesgo',
                 'descripcion': '$descripcion',
@@ -86,14 +104,17 @@ exports.map_risk = function(req, res) {
             }
         }],
         (err, data) => {
-            if (err) console.log(err);
+            if (err) res.json({
+                mensaje: "Lo sentimos ha surgido un problema y no podemos mostrar el mapa de los riesgos de lavado de activos," +
+                    "puede ser un problema nuestro o revisa que existan riesgos guardaos. Disculpa por las molestias "
+            });
             else res.send(data)
         });
 }
 exports.gerential_inform = function(req, res) {
     Riesgo.aggregate(
         [{
-            '$replaceWith': {
+            '$re placeWith': {
                 'code': '$code',
                 'nombre': '$riesgo',
                 'descripcion': '$descripcion',
@@ -105,7 +126,10 @@ exports.gerential_inform = function(req, res) {
             }
         }],
         (err, data) => {
-            if (err) console.log(err);
+            if (err) res.json({
+                mensaje: "Lo sentimos ha surgido un problema y no podemos mostrar el informe gerencial de los riesgos de lavado de activos," +
+                    "puede se un problema nuestro o revisa que existan riesgos guardaos. Disculpa por las molestias "
+            });
             else res.send(data)
         });
 }
