@@ -2,8 +2,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var riesgoSchema = new Schema({
+    id_user:{
+        type: Number,
+        required : true 
+    },
     code: {
         type: Number,
+        required: true
     },
     proceso_asociado: [String],
     riesgo: String,
